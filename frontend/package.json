@@ -1,0 +1,36 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@reduxjs/toolkit": "^2.11.2",
+    "@tailwindcss/postcss": "^4.3.0",
+    "axios": "^1.16.1",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-redux": "^9.2.0",
+    "react-router": "^7.16.0",
+    "react-router-dom": "^6.30.4",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.16.4",
+    "postcss": "^8.5.14",
+    "postcss-cli": "^11.0.1",
+    "process": "^0.11.10",
+    "tailwindcss": "^4.3.0"
+  }
+}

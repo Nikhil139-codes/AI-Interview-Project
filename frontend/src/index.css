@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer utilities {
+  .glassmorphism {
+    @apply bg-dark-800/40 backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
