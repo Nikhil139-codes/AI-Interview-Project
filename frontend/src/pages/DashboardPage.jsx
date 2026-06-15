@@ -6,7 +6,7 @@ import {
   BarChart, Bar
 } from 'recharts';
 import { Trophy, Clock, Target, Plus, Play, ChevronRight } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 import { useSelector } from 'react-redux';
 
 const mockPerformanceData = [
@@ -40,8 +40,8 @@ const DashboardPage = () => {
           const config = { headers: { Authorization: `Bearer ${userData.token}` } };
           
           const [interviewsRes, analyticsRes] = await Promise.all([
-            axios.get('http://localhost:5000/api/interviews', config),
-            axios.get('http://localhost:5000/api/interviews/analytics', config)
+            api.get('/api/interviews', config),
+            api.get('/api/interviews/analytics', config)
           ]);
           
           setInterviews(interviewsRes.data);

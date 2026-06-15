@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, Bot, ArrowRight } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, reset, googleLoginAction } from '../features/auth/authSlice';
-import axios from 'axios';
+import api from '../utils/api';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -16,7 +16,7 @@ const RegisterPage = () => {
   useEffect(() => {
     const fetchClientId = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/auth/google/client-id');
+        const response = await api.get('/api/auth/google/client-id');
         if (response.data && response.data.clientId) {
           setClientId(response.data.clientId);
         }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, BarChart3, MessageSquare, Activity, Trash2, Edit, Save, Plus, Loader2 } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 
 const AdminDashboardPage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -34,13 +34,13 @@ const AdminDashboardPage = () => {
     setError('');
     try {
       if (activeTab === 'overview') {
-        const { data } = await axios.get('http://localhost:5000/api/admin/analytics', axiosConfig);
+        const { data } = await api.get('/api/admin/analytics', axiosConfig);
         setAnalytics(data);
       } else if (activeTab === 'users') {
-        const { data } = await axios.get('http://localhost:5000/api/admin/users', axiosConfig);
+        const { data } = await api.get('/api/admin/users', axiosConfig);
         setUsersList(data);
       } else if (activeTab === 'prompts') {
-        const { data } = await axios.get('http://localhost:5000/api/admin/prompts', axiosConfig);
+        const { data } = await api.get('/api/admin/prompts', axiosConfig);
         setPrompts(data);
       }
     } catch (err) {
@@ -54,7 +54,7 @@ const AdminDashboardPage = () => {
   const handleDeleteUser = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/users/${id}`, axiosConfig);
+        await api.delete(`/api/admin/users/${id}`, axiosConfig);
         setUsersList(usersList.filter(u => u._id !== id));
       } catch (err) {
         alert('Failed to delete user.');
@@ -66,10 +66,10 @@ const AdminDashboardPage = () => {
     e.preventDefault();
     try {
       if (editingPrompt._id) {
-        await axios.put(`http://localhost:5000/api/admin/prompts/${editingPrompt._id}`, editingPrompt, axiosConfig);
+        await api.put(`/api/admin/prompts/${editingPrompt._id}`, editingPrompt, axiosConfig);
       } else {
         // Since we put logic in PUT, passing a fake ID to create if not exists
-        await axios.put(`http://localhost:5000/api/admin/prompts/new`, editingPrompt, axiosConfig);
+        await api.put(`/api/admin/prompts/new`, editingPrompt, axiosConfig);
       }
       setEditingPrompt(null);
       fetchData(); // Refresh prompts

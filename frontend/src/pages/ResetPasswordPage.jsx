@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Lock, ArrowRight, ArrowLeft, KeyRound } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 
 const ResetPasswordPage = () => {
   const { token } = useParams();
@@ -32,7 +32,7 @@ const ResetPasswordPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/auth/reset-password/${token}`, { password });
+      const response = await api.post(`/api/auth/reset-password/${token}`, { password });
       setMessage(response.data.message || 'Password updated successfully!');
       
       // Redirect to login after 3 seconds

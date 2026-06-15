@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Upload, CheckCircle2, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from 'recharts';
 import { useSelector } from 'react-redux';
 
@@ -45,7 +45,7 @@ const ResumeAnalyzerPage = () => {
         },
       };
 
-      const res = await axios.post('http://localhost:5000/api/resume/analyze', data, config);
+      const res = await api.post('/api/resume/analyze', data, config);
       setAnalysis(res.data);
     } catch (err) {
       console.error(err);

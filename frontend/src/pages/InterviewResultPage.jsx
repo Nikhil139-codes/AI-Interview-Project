@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { motion } from 'framer-motion';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { Trophy, Target, Zap, ArrowLeft, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
@@ -19,7 +19,7 @@ const InterviewResultPage = () => {
         const userData = JSON.parse(userStr);
         const config = { headers: { Authorization: `Bearer ${userData.token}` } };
         
-        const res = await axios.get(`http://localhost:5000/api/interviews/${id}`, config);
+        const res = await api.get(`/api/interviews/${id}`, config);
         setResult(res.data);
       } catch (err) {
         console.error(err);

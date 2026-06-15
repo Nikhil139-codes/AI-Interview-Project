@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from '../../utils/api';
 
-const API_URL = 'http://localhost:5000/api/auth/';
+const API_URL = '/api/auth/';
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL + 'register', userData);
+  const response = await api.post(API_URL + 'register', userData);
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
@@ -15,7 +15,7 @@ const register = async (userData) => {
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.post(API_URL + 'login', userData);
+  const response = await api.post(API_URL + 'login', userData);
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
@@ -31,7 +31,7 @@ const logout = () => {
 
 // Google Login
 const googleLogin = async (accessToken) => {
-  const response = await axios.post(API_URL + 'google', { accessToken });
+  const response = await api.post(API_URL + 'google', { accessToken });
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
@@ -42,13 +42,13 @@ const googleLogin = async (accessToken) => {
 
 // Forgot Password
 const forgotPassword = async (email) => {
-  const response = await axios.post(API_URL + 'forgot-password', { email });
+  const response = await api.post(API_URL + 'forgot-password', { email });
   return response.data;
 };
 
 // Reset Password
 const resetPassword = async (token, password) => {
-  const response = await axios.post(API_URL + `reset-password/${token}`, { password });
+  const response = await api.post(API_URL + `reset-password/${token}`, { password });
   return response.data;
 };
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, ArrowRight, Loader2, BrainCircuit } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 
 const dsaQuestions = [
   { id: 1, title: 'Two Sum', difficulty: 'Easy', category: 'Arrays & Hashing' },
@@ -46,7 +46,7 @@ const DSADashboardPage = () => {
         techStack: [q.category, 'Data Structures', 'Algorithms']
       };
 
-      const res = await axios.post('http://localhost:5000/api/interviews/setup', payload, config);
+      const res = await api.post('/api/interviews/setup', payload, config);
       navigate(`/interview/${res.data._id}`);
     } catch (err) {
       console.error(err);

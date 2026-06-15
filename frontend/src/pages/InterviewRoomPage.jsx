@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Editor from '@monaco-editor/react';
 import axios from 'axios';
+import api from '../utils/api';
 import { useSelector } from 'react-redux';
 import { Send, Play, ArrowLeft, Loader2, Bot, User, Code2, Terminal, Mic, MicOff, Volume2, VolumeX, Video, VideoOff, Clock, Activity } from 'lucide-react';
 
@@ -205,7 +206,7 @@ const InterviewRoomPage = () => {
           },
         };
 
-        const res = await axios.post(`http://localhost:5000/api/interviews/${id}/start`, {}, config);
+        const res = await api.post(`/api/interviews/${id}/start`, {}, config);
         setSession(res.data);
         setMessages(res.data.messages.filter(msg => msg.role !== 'system'));
       } catch (err) {
@@ -242,7 +243,7 @@ const InterviewRoomPage = () => {
         code: ''
       };
 
-      const res = await axios.post(`http://localhost:5000/api/interviews/${id}/answer`, payload, config);
+      const res = await api.post(`/api/interviews/${id}/answer`, payload, config);
       
       setSession(res.data);
       setMessages(res.data.messages.filter(msg => msg.role !== 'system'));
@@ -310,7 +311,7 @@ const InterviewRoomPage = () => {
         output: runOutput,
       };
 
-      const res = await axios.post(`http://localhost:5000/api/interviews/${id}/code-review`, payload, config);
+      const res = await api.post(`/api/interviews/${id}/code-review`, payload, config);
       
       setSession(res.data);
       setMessages(res.data.messages.filter(msg => msg.role !== 'system'));
@@ -331,7 +332,7 @@ const InterviewRoomPage = () => {
       const userData = JSON.parse(userStr);
       const config = { headers: { Authorization: `Bearer ${userData.token}` } };
       
-      await axios.post(`http://localhost:5000/api/interviews/${id}/end`, {}, config);
+      await api.post(`/api/interviews/${id}/end`, {}, config);
       navigate(`/interview/${id}/result`);
     } catch (err) {
       handleError(err, 'Failed to end interview and generate evaluation.');

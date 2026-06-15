@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, Briefcase, Code2, GraduationCap, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -67,7 +67,7 @@ const InterviewSetupPage = () => {
         },
       };
 
-      const res = await axios.post('http://localhost:5000/api/interviews/setup', data, config);
+      const res = await api.post('/api/interviews/setup', data, config);
       
       // Redirect to the actual interview room
       navigate(`/interview/${res.data._id}`);

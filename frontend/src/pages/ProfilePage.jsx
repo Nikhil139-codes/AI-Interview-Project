@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { User, Mail, Award, Zap, Code2, Link as LinkIcon, Save, Loader2, Upload, FileText, Settings } from 'lucide-react';
 import { updateUser } from '../features/auth/authSlice';
-import axios from 'axios';
+import api from '../utils/api';
 
 const ProfilePage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -69,7 +69,7 @@ const ProfilePage = () => {
         },
       };
 
-      const { data } = await axios.put('http://localhost:5000/api/users/profile', payload, config);
+      const { data } = await api.put('/api/users/profile', payload, config);
       dispatch(updateUser(data));
       setMessage('Profile updated successfully!');
     } catch (error) {
@@ -105,7 +105,7 @@ const ProfilePage = () => {
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post('http://localhost:5000/api/users/resume', formDataUpload, config);
+      const { data } = await api.post('/api/users/resume', formDataUpload, config);
       
       const updatedUser = { ...user, uploadedResumes: data };
       dispatch(updateUser(updatedUser));
